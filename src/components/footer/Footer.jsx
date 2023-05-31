@@ -50,7 +50,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <p className="py-3 text-center bg-black">
+            <p className="py-3 text-center bg-[#151515]">
                 Copyright © 2023 - All right reserved by Savory Soiree
                 Restaurant
             </p>
