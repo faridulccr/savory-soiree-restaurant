@@ -5,11 +5,11 @@ const Header = () => {
         <header className="max-w-screen-xl mx-auto bg-[rgba(21,21,21,0.5)] h-20 fixed z-[9999999] w-full px-8 pt-3.5 md:pt-4">
             <nav>
                 <div className="flex flex-wrap items-center justify-between mx-auto">
-                    <a className=" font-['Cinzel']" href="/">
-                        <span className="font-bold block text-amber-300">
+                    <a className=" leading-3 sm:leading-tight" href="/">
+                        <span className="font-[900] text-[0.8rem] sm:text-[1.3rem] block text-white font-['Cinzel']">
                             SAVORY SOIREE
                         </span>
-                        <span className="text-white tracking-[2.6px]">
+                        <span className="text-white tracking-[4px] sm:tracking-[5.7px] text-[0.7rem] sm:text-[1.2rem] font-[500] font-['Cinzel']">
                             RESTAURANT
                         </span>
                     </a>
@@ -43,7 +43,7 @@ const Header = () => {
                                 <ActiveRoute to="/">HOME</ActiveRoute>
                             </li>
                             <li>
-                                <ActiveRoute to="/contact-us">
+                                <ActiveRoute to="/contact">
                                     CONTACT US
                                 </ActiveRoute>
                             </li>
