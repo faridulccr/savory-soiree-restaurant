@@ -1,14 +1,13 @@
 import useTitle from "../../hooks/useTitle";
 import MyCarousel from "./MyCarousel";
+import MySwiper from "./MySwiper";
 
 const Home = () => {
-    useTitle("home");
+    useTitle("Home");
     return (
         <>
             <MyCarousel />
-            <div>
-                <h1 className="text-3xl font-bold underline">Home</h1>
-            </div>
+            <MySwiper />
         </>
     );
 };
