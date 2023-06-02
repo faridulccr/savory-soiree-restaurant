@@ -14,7 +14,10 @@ import Heading from "../../components/heading/Heading";
 const Slider = () => {
     return (
         <>
-            <Heading text="From 11:00am to 10:00pm" title="ORDER ONLINE" />
+            <Heading
+                subHeading="From 11:00am to 10:00pm"
+                heading="ORDER ONLINE"
+            />
             <Swiper
                 slidesPerView={4}
                 spaceBetween={20}
