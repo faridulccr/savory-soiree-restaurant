@@ -7,9 +7,11 @@ import img1 from "../../assets/menu/banner3.jpg";
 import img3 from "../../assets/menu/pizza-bg.jpg";
 import img4 from "../../assets/menu/salad-bg.jpg";
 import img5 from "../../assets/menu/soup-bg.jpg";
+import useMenu from "../../hooks/useMenu";
 
 const OurMenu = () => {
     useTitle("our-menu");
+    const [loading, menu] = useMenu();
 
     const menuCategory = [
         {
@@ -18,7 +20,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "TODAY'S OFFER",
             subHeading: "Don't miss",
-            category: "offered",
+            menu: menu.filter((value) => value.category === "offered"),
         },
         {
             image: img2,
@@ -26,7 +28,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "desserts",
             subHeading: "Check it out",
-            category: "dessert",
+            menu: menu.filter((value) => value.category === "dessert"),
         },
 
         {
@@ -35,7 +37,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "pizza",
             subHeading: "Check it out",
-            category: "pizza",
+            menu: menu.filter((value) => value.category === "pizza"),
         },
         {
             image: img4,
@@ -43,7 +45,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "salad",
             subHeading: "Check it out",
-            category: "salad",
+            menu: menu.filter((value) => value.category === "salad"),
         },
         {
             image: img5,
@@ -51,14 +53,20 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "soup",
             subHeading: "Check it out",
-            category: "soup",
+            menu: menu.filter((value) => value.category === "soup"),
         },
     ];
     return (
         <div>
-            {menuCategory.map((item, i) => (
-                <MenuWithCategory key={i} data={item} />
-            ))}
+            {loading && (
+                <div className="h-[100vh] flex items-center justify-center">
+                    <span className="loading loading-dots loading-lg"></span>
+                </div>
+            )}
+            {!loading &&
+                menuCategory.map((item, i) => (
+                    <MenuWithCategory key={i} data={item} />
+                ))}
         </div>
     );
 };

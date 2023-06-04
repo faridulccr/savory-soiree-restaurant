@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useMenu = (category) => {
+const useMenu = () => {
     const [loading, setLoading] = useState(true);
     const [menu, setMenu] = useState([]);
 
@@ -9,21 +9,11 @@ const useMenu = (category) => {
             const res = await fetch("menu.json");
             const data = await res.json();
             // console.log(data);
-
-            if (category === "all") {
-                setMenu(data);
-            } else if (category) {
-                const findMenuByCategory = data.filter(
-                    (item) =>
-                        String(item.category).toLowerCase() ===
-                        String(category).toLowerCase()
-                );
-                setMenu(findMenuByCategory);
-            }
+            setMenu(data);
             setLoading(false);
         };
         getData();
-    }, [category]);
+    }, []);
 
     return [loading, menu];
 };

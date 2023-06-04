@@ -1,31 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Heading from "../../components/heading/Heading";
 import MenuCards from "../../components/menu-cards/MenuCards";
 import useMenu from "../../hooks/useMenu";
 
 const MenuSection = () => {
-    const [loading, menu] = useMenu("all");
-    const [allMenu, setAllMenu] = useState([]);
+    const [loading, menu] = useMenu();
     const [isShowAll, setIsShowAll] = useState(false);
-
-    useEffect(() => {
-        setAllMenu([...menu.slice(0, 6)]);
-    }, [menu]);
+    const popularMenu = menu.filter((item) => item.category === "popular");
 
     const ViewFullMenu = () => {
         setIsShowAll(true);
-        setAllMenu(menu);
     };
 
-    const ViewShortMenu = () => {
+    const ViewPopularMenu = () => {
         setIsShowAll(false);
-        setAllMenu([...menu.slice(0, 6)]);
     };
 
     return (
         <>
-            <Heading subHeading="Check it out" heading="From our menu" />
-            {!loading && <MenuCards menu={allMenu} />}
+            <Heading subHeading="Popular Items" heading="From our menu" />
+            {!loading && !isShowAll && <MenuCards menu={popularMenu} />}
+            {!loading && isShowAll && <MenuCards menu={menu} />}
 
             <div className="mt-12 text-center font-['Inter']">
                 {!isShowAll && (
@@ -38,10 +33,10 @@ const MenuSection = () => {
                 )}
                 {isShowAll && (
                     <button
-                        onClick={ViewShortMenu}
+                        onClick={ViewPopularMenu}
                         className="uppercase w-fit px-7 py-1 font-semibold border-b-[3px] border-gray-900 rounded-xl"
                     >
-                        View Short Menu
+                        View Popular Menu
                     </button>
                 )}
             </div>

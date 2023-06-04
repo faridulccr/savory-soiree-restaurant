@@ -24,7 +24,7 @@ export default {
     plugins: [require("daisyui"), require("flowbite/plugin")],
     // darkMode: 'class',
     daisyui: {
-        // themes: ["light"],
-        themes: false,
+        themes: ["light"],
+        // themes: false,
     },
 };

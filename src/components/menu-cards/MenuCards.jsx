@@ -1,5 +1,3 @@
-import "./MenuCards.css";
-
 const MenuCards = ({ menu }) => {
     return (
         <div className="grid md:grid-cols-2 gap-5 px-4 xl:px-0">
