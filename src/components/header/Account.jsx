@@ -1,33 +1,28 @@
+import profile from "../../assets/others/profile.png";
 import { useAuth } from "../../providers/AuthProvider";
-import "./Account.style.scss";
+import "./Account.style.css";
 import ActiveRoute from "./ActiveRoute";
 
 const Account = () => {
     const { currentUser, logout } = useAuth();
     // console.log(currentUser?.email);
 
-    return (
+    return currentUser ? (
         <div className="account">
-            {currentUser ? (
-                <>
-                    <ActiveRoute to={"/my-toys"}>My Toys</ActiveRoute>
-                    <ActiveRoute to="/add-a-toy">Add A Toy</ActiveRoute>
-                    <img
-                        className="account-logo ms-4"
-                        src={currentUser?.photoURL}
-                        title={currentUser?.displayName}
-                    />
-                    <a href="#" onClick={logout}>
-                        Logout
-                    </a>
-                </>
-            ) : (
-                <>
-                    <ActiveRoute to="/signup">Sign up</ActiveRoute>
-                    <ActiveRoute to="/login">Log in</ActiveRoute>
-                </>
-            )}
+            <img
+                className="account-logo"
+                src={currentUser?.photoURL || profile}
+                title={currentUser?.displayName}
+            />
+            <button
+                className="text-white font-semibold hover:text-pink-300"
+                onClick={logout}
+            >
+                LOG OUT
+            </button>
         </div>
+    ) : (
+        <ActiveRoute to="/login">LOG IN</ActiveRoute>
     );
 };
 

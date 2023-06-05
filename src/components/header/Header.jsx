@@ -1,10 +1,13 @@
 import "flowbite/dist/flowbite.min.js";
+import Account from "./Account";
+import "./Account.style.css";
 import ActiveRoute from "./ActiveRoute";
+
 const Header = () => {
     return (
-        <header className="max-w-screen-xl mx-auto bg-[rgba(21,21,21,0.5)] h-20 fixed z-[9999999] w-full px-8 pt-3.5 md:pt-4">
+        <header className="header-style max-w-screen-xl mx-auto bg-[rgba(21,21,21,0.5)] h-20 fixed z-[9999999] w-full px-8 pt-3.5 md:pt-4">
             <nav>
-                <div className="flex flex-wrap items-center justify-between mx-auto">
+                <div className="nav-style flex flex-wrap items-center justify-between mx-auto">
                     <a className=" leading-3 sm:leading-tight" href="/">
                         <span className="font-[900] text-[0.8rem] sm:text-[1.3rem] block text-white font-['Cinzel']">
                             SAVORY SOIREE
@@ -61,6 +64,9 @@ const Header = () => {
                                 <ActiveRoute to="/order">
                                     ORDER FOOD
                                 </ActiveRoute>
+                            </li>
+                            <li>
+                                <Account />
                             </li>
                         </ul>
                     </div>
