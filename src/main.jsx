@@ -10,7 +10,7 @@ import Contact from "./routes/Contact/Contact";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import Home from "./routes/Home/Home";
 import OurMenu from "./routes/Our-menu/OurMenu";
-import OurShop from "./routes/Our-shop/OurShop";
+import OrderFood from "./routes/Our-shop/OrderFood";
 
 const router = createBrowserRouter([
     {
@@ -35,8 +35,12 @@ const router = createBrowserRouter([
                 element: <OurMenu />,
             },
             {
-                path: "/our-shop",
-                element: <OurShop />,
+                path: "/order",
+                element: <OrderFood />,
+            },
+            {
+                path: "/order/:category",
+                element: <OrderFood />,
             },
         ],
     },

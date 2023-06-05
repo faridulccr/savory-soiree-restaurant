@@ -2,39 +2,20 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import quote from "../../assets/quote.png";
 import Heading from "../../components/heading/Heading";
+import useReview from "../../hooks/useReview";
 
 const Testimonial = () => {
-    const data = [
-        {
-            name: "Jane Doe",
-            description:
-                "Various version have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            ratings: 4.5,
-        },
-        {
-            name: "Pitter Doe",
-            description: "Various version have evolved over the years,",
-            ratings: 5,
-        },
-        {
-            name: "Mr Franklin",
-            description: "Various version have evolved over the years,",
-            ratings: 4.5,
-        },
-        {
-            name: "Brad Pit",
-            description: "Various version have evolved over the years,",
-            ratings: 4.8,
-        },
-    ];
+    const [loading, reviews] = useReview();
+
     return (
         <div>
             <Heading subHeading="What Our Clients Say" heading="TESTIMONIALS" />
             <div className="carousel w-full">
-                {Array.isArray(data) &&
-                    data.map(({ name, description, ratings }, i) => (
+                {!loading &&
+                    Array.isArray(reviews) &&
+                    reviews.map(({ _id, name, details, rating }, i) => (
                         <div
-                            key={i}
+                            key={_id}
                             id={`slide${i + 1}`}
                             className="carousel-item relative w-full"
                         >
@@ -42,7 +23,7 @@ const Testimonial = () => {
                                 <Rating
                                     className="mx-auto"
                                     style={{ maxWidth: 180 }}
-                                    value={ratings}
+                                    value={rating}
                                     readOnly
                                 />
 
@@ -66,21 +47,23 @@ const Testimonial = () => {
                                     />
                                 </div>
 
-                                <p>{description}</p>
+                                <p>{details}</p>
                                 <h2 className=" text-3xl text-[#CD9003] uppercase mt-5">
                                     {name}
                                 </h2>
                             </div>
                             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                 <a
-                                    href={`#slide${i == 0 ? data.length : i}`}
+                                    href={`#slide${
+                                        i == 0 ? reviews.length : i
+                                    }`}
                                     className="btn btn-circle bg-opacity-20 border-none "
                                 >
                                     ❮
                                 </a>
                                 <a
                                     href={`#slide${
-                                        i == data.length - 1 ? 1 : i + 2
+                                        i + 1 == reviews.length ? 1 : i + 2
                                     }`}
                                     className="btn btn-circle bg-opacity-20 border-none"
                                 >

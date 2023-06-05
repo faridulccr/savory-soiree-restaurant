@@ -58,8 +58,8 @@ const Header = () => {
                                 </ActiveRoute>
                             </li>
                             <li>
-                                <ActiveRoute to="/our-shop">
-                                    OUR SHOP
+                                <ActiveRoute to="/order">
+                                    ORDER FOOD
                                 </ActiveRoute>
                             </li>
                         </ul>

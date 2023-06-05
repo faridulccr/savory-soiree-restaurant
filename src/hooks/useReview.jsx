@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useMenu = () => {
+const useReview = () => {
     const [loading, setLoading] = useState(true);
-    const [menu, setMenu] = useState([]);
+    const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const res = await fetch(
-                    `${import.meta.env.VITE_SAVORY_SERVER}/api/menu`
+                    `${import.meta.env.VITE_SAVORY_SERVER}/api/reviews`
                 );
                 const data = await res.json();
                 // console.log(data);
-                setMenu(data);
+                setReviews(data);
                 setLoading(false);
             } catch (error) {
                 console.log(error);
@@ -22,7 +22,7 @@ const useMenu = () => {
         getData();
     }, []);
 
-    return [loading, menu];
+    return [loading, reviews];
 };
 
-export default useMenu;
+export default useReview;

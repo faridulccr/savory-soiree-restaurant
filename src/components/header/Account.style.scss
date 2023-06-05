@@ -1,0 +1,18 @@
+/* account component */
+.account {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.account .account-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+@media screen and (max-width: 992px) {
+    .account {
+        flex-direction: column;
+        align-items: start;
+    }
+}

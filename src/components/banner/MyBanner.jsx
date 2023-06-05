@@ -11,9 +11,9 @@ const MyBanner = ({ image, title, subTitle }) => {
             >
                 <div className="hero h-[200px] xs:h-[350px] sm:h-[500px]">
                     {title && (
-                        <div className="hero-content text-center text-neutral-content w-5/6 sm:w-2/3 h-fit xs:h-1/2 mx-auto bg-black bg-opacity-50">
+                        <div className="hero-content text-center text-white w-5/6 sm:w-2/3 h-fit xs:h-1/2 mx-auto bg-black bg-opacity-50">
                             <div className="w-5/6 font-['Cinzel']">
-                                <h1 className="mb-4 text-2xl sm:text-5xl font-bold uppercase ">
+                                <h1 className="mb-4 text-2xl sm:text-5xl font-bold uppercase">
                                     {title}
                                 </h1>
                                 <p className="uppercase">{subTitle || ""}</p>

@@ -13,6 +13,10 @@ const OurMenu = () => {
     useTitle("our-menu");
     const [loading, menu] = useMenu();
 
+    const findMenuByCategory = (category) => {
+        return menu.filter((item) => item.category === category);
+    };
+
     const menuCategory = [
         {
             image: img1,
@@ -20,7 +24,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "TODAY'S OFFER",
             subHeading: "Don't miss",
-            menu: menu.filter((value) => value.category === "offered"),
+            category: "offered",
         },
         {
             image: img2,
@@ -28,7 +32,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "desserts",
             subHeading: "Check it out",
-            menu: menu.filter((value) => value.category === "dessert"),
+            category: "dessert",
         },
 
         {
@@ -37,7 +41,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "pizza",
             subHeading: "Check it out",
-            menu: menu.filter((value) => value.category === "pizza"),
+            category: "pizza",
         },
         {
             image: img4,
@@ -45,7 +49,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "salad",
             subHeading: "Check it out",
-            menu: menu.filter((value) => value.category === "salad"),
+            category: "salad",
         },
         {
             image: img5,
@@ -53,7 +57,7 @@ const OurMenu = () => {
             description: "WOULD YOU LIKE TO TRY ANY?",
             heading: "soup",
             subHeading: "Check it out",
-            menu: menu.filter((value) => value.category === "soup"),
+            category: "soup",
         },
     ];
     return (
@@ -65,7 +69,11 @@ const OurMenu = () => {
             )}
             {!loading &&
                 menuCategory.map((item, i) => (
-                    <MenuWithCategory key={i} data={item} />
+                    <MenuWithCategory
+                        key={i}
+                        data={item}
+                        menu={findMenuByCategory(item.category)}
+                    />
                 ))}
         </div>
     );
