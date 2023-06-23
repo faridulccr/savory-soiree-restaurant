@@ -1,7 +1,6 @@
 /* account component */
 .account {
     display: flex;
-    justify-content: start;
     align-items: center;
     column-gap: 20px;
 }
