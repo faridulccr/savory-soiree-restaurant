@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import facebook from "../../assets/icon/facebook.png";
 import github from "../../assets/icon/github.png";
 import google from "../../assets/icon/google.png";
@@ -12,8 +13,16 @@ const SocialMediaSignIn = () => {
     const signinWithFacebook = async () => {
         try {
             await facebookSignIn();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Log in Successful!",
+                showConfirmButton: false,
+                timer: 3000,
+            });
             navigate(location.state?.from || "/");
         } catch (error) {
+            Swal.fire(error.message);
             console.log(error);
         }
     };
@@ -21,16 +30,32 @@ const SocialMediaSignIn = () => {
     const signinWithGoogle = async () => {
         try {
             await googleSignIn();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Log in Successful!",
+                showConfirmButton: false,
+                timer: 3000,
+            });
             navigate(location.state?.from || "/");
         } catch (error) {
+            Swal.fire(error.message);
             console.log(error);
         }
     };
     const signinWithGithub = async () => {
         try {
             await githubSignIn();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Log in Successful!",
+                showConfirmButton: false,
+                timer: 3000,
+            });
             navigate(location.state?.from || "/");
         } catch (error) {
+            Swal.fire(error.message);
             console.log(error);
         }
     };

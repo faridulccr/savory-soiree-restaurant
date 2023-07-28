@@ -6,6 +6,7 @@ import "./index.css";
 // components
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 import AuthProvider from "./providers/AuthProvider";
 import Contact from "./routes/Contact/Contact";
 import Dashboard from "./routes/Dashboard/Dashboard";
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard",
-                element: <Dashboard />,
+                element: (
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/our-menu",

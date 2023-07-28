@@ -20,7 +20,7 @@ const AuthContext = React.createContext();
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
     //for accessing context value in others file
-    return useContext(AuthContext); //=> {currentUser, signUp, login, googleSignIn, logout}
+    return useContext(AuthContext); //=> {currentUser, signUp, login,facebookSignIn,googleSignIn,githubSignIn,logout}
 };
 
 //authentication provider func for adding value and return

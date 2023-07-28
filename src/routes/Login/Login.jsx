@@ -4,8 +4,11 @@ import {
     loadCaptchaEnginge,
     validateCaptcha,
 } from "react-simple-captcha";
+import Swal from "sweetalert2";
 
 import { useEffect, useState } from "react";
+import eye_slash from "../../assets/icon/eye-slash-regular.svg";
+import eye from "../../assets/icon/eye-solid.svg";
 import img from "../../assets/others/authentication2.png";
 import Input from "../../components/input/Input";
 import SocialMediaSignIn from "../../components/social-media-signin/SocialMediaSignIn";
@@ -15,6 +18,8 @@ import "./Login.style.css";
 const Login = () => {
     const [isDisable, setIsDisable] = useState(true);
     const [captchaValue, setCaptchaValue] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [hidePassword, setHidePassword] = useState(true);
     const { login } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
@@ -27,7 +32,12 @@ const Login = () => {
         if (validateCaptcha(captchaValue) == true) {
             setIsDisable(false);
         } else {
-            alert("Captcha Does Not Match");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Captcha Does Not Match!",
+            });
+            setIsDisable(true);
         }
     };
     const handleSubmit = async (e) => {
@@ -37,9 +47,20 @@ const Login = () => {
         const password = form.password.value;
 
         try {
+            setLoading(true);
             await login(email, password);
+            setLoading(false);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Log in Successful!",
+                showConfirmButton: false,
+                timer: 3000,
+            });
             navigate(location.state?.from || "/");
         } catch (error) {
+            Swal.fire(error.message);
+            setLoading(false);
             console.log(error);
         }
     };
@@ -57,18 +78,19 @@ const Login = () => {
                         Login now!
                     </h1>
                     <form onSubmit={handleSubmit}>
+                        <Input type="email" name="email" placeholder="Email" />
                         <Input
-                            type="email"
-                            name="email"
-                            label="Email"
-                            placeholder="Type here"
-                        />
-                        <Input
-                            type="password"
+                            type={hidePassword ? "password" : "text"}
                             name="password"
-                            label="Password"
-                            placeholder="Enter your password"
-                        />
+                            placeholder="Password"
+                        >
+                            <img
+                                className="absolute right-2 bottom-4 w-5 cursor-pointer"
+                                onClick={() => setHidePassword(!hidePassword)}
+                                src={hidePassword ? eye_slash : eye}
+                                alt="eye"
+                            />
+                        </Input>
                         <a href="/" className="label-text-alt link link-hover">
                             Forgot password?
                         </a>
@@ -79,27 +101,27 @@ const Login = () => {
                             </label>
                             <Input
                                 type="text"
-                                placeholder="Type thr captcha"
+                                placeholder="Type the captcha"
                                 value={captchaValue}
                                 onChange={(e) =>
                                     setCaptchaValue(e.target.value)
                                 }
                             />
 
-                            <button
+                            <p
                                 onClick={captchaValidation}
                                 className="btn btn-outline btn-accent mt-1"
                             >
                                 Verify
-                            </button>
+                            </p>
                         </div>
                         <div className="form-control mt-6">
                             <button
                                 type="submit"
                                 className="btn bg-[#D1A054] text-white hover:bg-[#060330]"
-                                disabled={isDisable}
+                                disabled={isDisable || loading}
                             >
-                                Login
+                                {loading ? "loading..." : "Login"}
                             </button>
                         </div>
                     </form>

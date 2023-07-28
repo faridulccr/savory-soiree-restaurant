@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import img from "../../assets/others/authentication.gif";
+import Swal from "sweetalert2";
+import eye_slash from "../../assets/icon/eye-slash-regular.svg";
+import eye from "../../assets/icon/eye-solid.svg";
+import img from "../../assets/others/sign-up.gif";
 import Input from "../../components/input/Input";
 import SocialMediaSignIn from "../../components/social-media-signin/SocialMediaSignIn";
 import { useAuth } from "../../providers/AuthProvider";
@@ -9,18 +13,45 @@ const SignUp = () => {
     const { signUp } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [hidePassword, setHidePassword] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
         const form = e.target;
         const userName = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
+        const photoURL = form.photoURL.value;
+
+        if (!/(?=.*[A-Z])/.test(password)) {
+            setError("Please add at least one uppercase");
+            return;
+        } else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
+            setError("Please add at least two digits");
+            return;
+        } else if (password.length < 6) {
+            setError("Please use at least 6 character for your password");
+            return;
+        }
 
         try {
-            await signUp(email, password, userName);
+            setLoading(true);
+            await signUp(email, password, userName, photoURL);
             navigate(location.state?.from || "/");
+            setLoading(false);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Sign up Successful!",
+                showConfirmButton: false,
+                timer: 3000,
+            });
         } catch (error) {
+            Swal.fire(error.message);
+            setLoading(false);
             console.log(error);
         }
     };
@@ -46,17 +77,32 @@ const SignUp = () => {
                             placeholder="Type here"
                         />
                         <Input
-                            type="password"
+                            type={hidePassword ? "password" : "text"}
                             name="password"
                             label="Password"
                             placeholder="Enter your password"
+                        >
+                            <img
+                                className="absolute right-2 bottom-4 w-5 cursor-pointer"
+                                onClick={() => setHidePassword(!hidePassword)}
+                                src={hidePassword ? eye_slash : eye}
+                                alt="eye"
+                            />
+                        </Input>
+                        {error && <p className="text-error">{error}</p>}
+                        <Input
+                            type="text"
+                            name="photoURL"
+                            label="Photo URL"
+                            placeholder="Enter URL"
                         />
                         <div className="form-control mt-6">
                             <button
                                 type="submit"
                                 className="btn bg-[#D1A054] text-white hover:bg-[#060330]"
+                                disabled={!!loading}
                             >
-                                Sign Up
+                                {loading ? "loading..." : "Sign Up"}
                             </button>
                         </div>
                     </form>
@@ -73,7 +119,7 @@ const SignUp = () => {
                     </div>
                 </div>
                 <img
-                    className="hidden sm:block h-auto w-full md:w-3/4 mx-auto rounded-[50%]"
+                    className="hidden sm:block h-auto w-full md:w-3/4 mx-auto"
                     src={img}
                     alt=""
                 />

@@ -1,6 +1,6 @@
-const Input = ({ type, name, label, placeholder, ...rest }) => {
+const Input = ({ type, name, label, placeholder, children, ...rest }) => {
     return (
-        <div className="form-control">
+        <div className="form-control relative">
             <label className="label font-semibold">
                 <span className="label-text">{label}</span>
             </label>
@@ -12,6 +12,7 @@ const Input = ({ type, name, label, placeholder, ...rest }) => {
                 required
                 {...rest}
             />
+            {children}
         </div>
     );
 };
