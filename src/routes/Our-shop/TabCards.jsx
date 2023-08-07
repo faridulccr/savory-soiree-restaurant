@@ -8,9 +8,10 @@ const TabCards = ({ menu }) => {
                     <FoodCard
                         key={Math.random()}
                         image={item.image}
-                        title={item.name}
+                        name={item.name}
                         description={item.recipe}
                         price={item.price}
+                        cartId={item._id}
                     />
                 ))}
         </div>

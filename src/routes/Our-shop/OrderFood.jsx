@@ -13,8 +13,15 @@ const OrderFood = () => {
     useTitle("our-shop");
     const [loading, menu] = useMenu();
     const { category } = useParams();
-    const allMenu = ["salad", "pizza", "soup", "dessert", "drinks", "offered"];
-    const initialIndex = allMenu.indexOf(category);
+    const menuCategory = [
+        "salad",
+        "pizza",
+        "soup",
+        "dessert",
+        "drinks",
+        "offered",
+    ];
+    const initialIndex = menuCategory.indexOf(category);
     const [tabIndex, setTabIndex] = useState(
         initialIndex > -1 ? initialIndex : 0
     );
@@ -45,7 +52,7 @@ const OrderFood = () => {
                     </TabList>
 
                     {!loading &&
-                        allMenu.map((c, i) => (
+                        menuCategory.map((c, i) => (
                             <TabPanel key={i}>
                                 <TabCards menu={findMenuByCategory(c)} />
                             </TabPanel>

@@ -12,10 +12,12 @@ import eye from "../../assets/icon/eye-solid.svg";
 import img from "../../assets/others/authentication2.png";
 import Input from "../../components/input/Input";
 import SocialMediaSignIn from "../../components/social-media-signin/SocialMediaSignIn";
+import useTitle from "../../hooks/useTitle";
 import { useAuth } from "../../providers/AuthProvider";
 import "./Login.style.css";
 
 const Login = () => {
+    useTitle("Login");
     const [isDisable, setIsDisable] = useState(true);
     const [captchaValue, setCaptchaValue] = useState("");
     const [loading, setLoading] = useState(false);

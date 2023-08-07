@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useReview = () => {
-    const [loading, setLoading] = useState(true);
-    const [reviews, setReviews] = useState([]);
+    const { isLoading, data: reviews = [] } = useQuery({
+        queryKey: ["reviews"],
+        queryFn: async () => {
+            const response = await fetch(
+                `${import.meta.env.VITE_SAVORY_SERVER}/api/reviews`
+            );
+            // if (!response.ok) {
+            //     throw new Error("Network response was not ok");
+            // }
+            return response.json();
+        },
+    });
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await fetch(
-                    `${import.meta.env.VITE_SAVORY_SERVER}/api/reviews`
-                );
-                const data = await res.json();
-                // console.log(data);
-                setReviews(data);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            }
-        };
-        getData();
-    }, []);
-
-    return [loading, reviews];
+    return [isLoading, reviews];
 };
 
 export default useReview;

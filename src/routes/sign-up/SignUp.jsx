@@ -6,10 +6,12 @@ import eye from "../../assets/icon/eye-solid.svg";
 import img from "../../assets/others/sign-up.gif";
 import Input from "../../components/input/Input";
 import SocialMediaSignIn from "../../components/social-media-signin/SocialMediaSignIn";
+import useTitle from "../../hooks/useTitle";
 import { useAuth } from "../../providers/AuthProvider";
 import "../Login/Login.style.css";
 
 const SignUp = () => {
+    useTitle("Signup");
     const { signUp } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();

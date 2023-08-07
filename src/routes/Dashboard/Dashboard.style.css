@@ -1,0 +1,32 @@
+.drawer-side .menu li {
+    padding-left: 10px;
+}
+.drawer-side .menu li a {
+    padding: 0;
+    margin-bottom: 24px;
+    color: #151515;
+    font-family: Cinzel;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.drawer-side .menu li a:hover {
+    color: #f2ea07;
+    background-color: #d1a054;
+    font-weight: 700;
+}
+.drawer-side .menu li a.active {
+    color: #fff;
+    background-color: #d1a054;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 640px) {
+    .drawer-side .menu li a {
+        margin-bottom: 16px;
+        font-size: 13px;
+    }
+}

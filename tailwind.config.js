@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-        "./node_modules/flowbite/**/*.js",
-    ],
+    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {},
         screens: {
@@ -21,7 +17,7 @@ export default {
             // => @media (min-width: 1536px) { ... } },
         },
     },
-    plugins: [require("daisyui"), require("flowbite/plugin")],
+    plugins: [require("daisyui")],
     // darkMode: 'class',
     daisyui: {
         themes: ["light"],

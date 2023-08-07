@@ -1,28 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useMenu = () => {
-    const [loading, setLoading] = useState(true);
-    const [menu, setMenu] = useState([]);
+    const { isLoading, data: menu = [] } = useQuery({
+        queryKey: ["menu"],
+        queryFn: async () => {
+            const response = await fetch(
+                `${import.meta.env.VITE_SAVORY_SERVER}/api/menu`
+            );
+            // if (!response.ok) {
+            //     throw new Error("Network response was not ok");
+            // }
+            return response.json();
+        },
+    });
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await fetch(
-                    `${import.meta.env.VITE_SAVORY_SERVER}/api/menu`
-                );
-                const data = await res.json();
-                // console.log(data);
-                setMenu(data);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            }
-        };
-        getData();
-    }, []);
-
-    return [loading, menu];
+    return [isLoading, menu];
 };
 
 export default useMenu;

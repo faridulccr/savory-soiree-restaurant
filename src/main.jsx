@@ -1,12 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
 
 // components
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import MyCart from "./components/my-cart/MyCart";
 import AuthProvider from "./providers/AuthProvider";
 import Contact from "./routes/Contact/Contact";
 import Dashboard from "./routes/Dashboard/Dashboard";
@@ -15,6 +17,9 @@ import Login from "./routes/Login/Login";
 import OurMenu from "./routes/Our-menu/OurMenu";
 import OrderFood from "./routes/Our-shop/OrderFood";
 import SignUp from "./routes/sign-up/SignUp";
+
+// Create a client
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
     {
@@ -39,14 +44,6 @@ const router = createBrowserRouter([
                 element: <Contact />,
             },
             {
-                path: "/dashboard",
-                element: (
-                    <PrivateRoute>
-                        <Dashboard />
-                    </PrivateRoute>
-                ),
-            },
-            {
                 path: "/our-menu",
                 element: <OurMenu />,
             },
@@ -60,12 +57,29 @@ const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path: "/dashboard",
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "/dashboard/my-cart",
+                element: <MyCart />,
+            },
+        ],
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <AuthProvider>
-            <RouterProvider router={router} />
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+            </QueryClientProvider>
         </AuthProvider>
     </React.StrictMode>
 );
