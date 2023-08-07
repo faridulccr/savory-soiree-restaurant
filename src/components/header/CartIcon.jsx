@@ -8,7 +8,7 @@ const CartIcon = () => {
     return (
         <Link
             className="bg-[rgba(60,235,116,0.7)] flex px-1 rounded items-center"
-            to="/"
+            to="/dashboard/my-cart"
         >
             <img className="w-8" src={cart_icon} alt="" />
             <span className="bg-[rgba(230,56,181,0.75)] rounded-full px-2 text-white text-sm">

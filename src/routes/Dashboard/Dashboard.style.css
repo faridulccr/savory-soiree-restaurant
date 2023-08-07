@@ -1,6 +1,8 @@
 .drawer-side .menu li {
     padding-left: 10px;
+
 }
+
 .drawer-side .menu li a {
     padding: 0;
     margin-bottom: 24px;
@@ -11,6 +13,14 @@
     font-weight: 500;
     line-height: normal;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.drawer-side .menu li a svg {
+    width: 28px;
+    height: 28px;
+    /* color: #151515; */
 }
 
 .drawer-side .menu li a:hover {
@@ -18,6 +28,7 @@
     background-color: #d1a054;
     font-weight: 700;
 }
+
 .drawer-side .menu li a.active {
     color: #fff;
     background-color: #d1a054;

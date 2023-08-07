@@ -1,0 +1,10 @@
+.table thead tr th {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background: #D1A054;
+    text-transform: uppercase;
+}

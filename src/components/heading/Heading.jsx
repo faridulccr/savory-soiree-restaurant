@@ -1,6 +1,6 @@
-const Heading = ({ heading, subHeading }) => {
+const Heading = ({ heading, subHeading, ...rest }) => {
     return (
-        <div className="mt-16">
+        <div className="mt-16" {...rest}>
             <p className="italic text-[#D99904] text-lg text-center">
                 ---{subHeading}---
             </p>

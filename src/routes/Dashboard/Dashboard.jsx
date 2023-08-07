@@ -1,6 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { AiOutlineMail } from "react-icons/ai";
+import {
+    FaBookmark,
+    FaCalendarAlt,
+    FaHome,
+    FaList,
+    FaLock,
+    FaShoppingCart,
+    FaWallet,
+} from "react-icons/fa";
+import { VscPreview } from "react-icons/vsc";
+import { NavLink, Outlet } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
-import ActiveSideBar from "./ActiveSideBar";
 import "./Dashboard.style.css";
 
 const Dashboard = () => {
@@ -41,46 +51,57 @@ const Dashboard = () => {
                         </a>
                         {/* without slash means start from current path (dashboard) */}
                         <li>
-                            <ActiveSideBar to="user-home">
-                                User Home
-                            </ActiveSideBar>
+                            <NavLink to="user-home">
+                                <FaHome /> User Home
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="reservation">
-                                Reservation
-                            </ActiveSideBar>
+                            <NavLink to="reservation">
+                                <FaCalendarAlt /> Reservation
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="payment-history">
-                                payment history
-                            </ActiveSideBar>
+                            <NavLink to="payment-history">
+                                <FaWallet /> payment history
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="my-cart">my cart</ActiveSideBar>
+                            <NavLink to="my-cart">
+                                <FaShoppingCart /> my cart
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="add-review">
+                            <NavLink to="add-review">
+                                <VscPreview />
                                 add review
-                            </ActiveSideBar>
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="my-booking">
-                                my booking
-                            </ActiveSideBar>
+                            <NavLink to="my-booking">
+                                <FaBookmark /> my booking
+                            </NavLink>
                         </li>
                         <hr className="mt-2 mb-8 w-full" />
                         {/* with slash means start from home path (/) */}
                         <li>
-                            <ActiveSideBar to="/">home</ActiveSideBar>
+                            <NavLink to="/">
+                                <FaHome /> home
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="/our-menu">menu</ActiveSideBar>
+                            <NavLink to="/our-menu">
+                                <FaList /> menu
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="/order">shop</ActiveSideBar>
+                            <NavLink to="/order">
+                                <FaLock /> shop
+                            </NavLink>
                         </li>
                         <li>
-                            <ActiveSideBar to="/contact">contact</ActiveSideBar>
+                            <NavLink to="/contact">
+                                <AiOutlineMail /> contact
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
