@@ -9,7 +9,7 @@ function App() {
     const isSigninPage = location.pathname.includes("sign-up");
 
     return (
-        <section className="max-w-screen-xl mx-auto">
+        <section className="max-w-screen-xl mx-auto bg-[#F1F2F4]">
             {isLoginPage || isSigninPage || <Header />}
             <main>
                 <Outlet />

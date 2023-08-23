@@ -9,16 +9,16 @@ const MyCart = () => {
     const [refetch, isLoading, carts] = useCart();
     const navigate = useNavigate();
 
-    const calculateTotalPrice = (items) => {
-        if (items?.length > 0) {
-            return items
+    const calculateTotalPrice = () => {
+        if (carts?.length > 0) {
+            return carts
                 .reduce((total, item) => total + item?.price, 0)
                 .toFixed(1);
         } else return 0;
     };
 
     const handlePaybtn = () => {
-        const totalPrice = calculateTotalPrice(carts);
+        const totalPrice = calculateTotalPrice();
         if (totalPrice > 0) {
             navigate("/payment", { state: totalPrice });
         } else {
@@ -60,17 +60,17 @@ const MyCart = () => {
                 heading="WANNA ADD MORE?"
                 subHeading="My Cart"
             />
-            <div className="w-5/6 mx-auto bg-white p-8 sm:p-12">
+            <div className="w-[390px] xs:w-[475px] sm:w-5/6 mx-auto bg-white p-8 sm:p-12 table-container">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-[#151515]">
                     <span className="font-['Cinzel'] text-xl font-bold">
                         TOTAL ORDER: {!isLoading && (carts?.length || 0)}
                     </span>
                     <span className="font-['Cinzel'] text-xl font-bold">
-                        TOTAL PRICE: ${!isLoading && calculateTotalPrice(carts)}
+                        TOTAL PRICE: ${!isLoading && calculateTotalPrice()}
                     </span>
                     <button
                         onClick={handlePaybtn}
-                        className="py-3.5 px-4 rounded-lg bg-[#D1A054] text-sm text-white font-bold"
+                        className="py-3.5 px-4 rounded-lg bg-[#D1A054] hover:bg-[#c67e12] text-sm text-white font-bold"
                     >
                         PAY
                     </button>
@@ -96,7 +96,7 @@ const MyCart = () => {
                                         </td>
                                         <td>
                                             <img
-                                                className="w-16 h-16"
+                                                className="mask mask-squircle w-16 h-16"
                                                 src={item.image}
                                             />
                                         </td>
