@@ -42,6 +42,16 @@ const SignUp = () => {
         try {
             setLoading(true);
             await signUp(email, password, userName, photoURL);
+            await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/users`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: userName,
+                    email,
+                    role: "user",
+                }),
+            });
+
             navigate(location.state?.from || "/");
             setLoading(false);
             Swal.fire({

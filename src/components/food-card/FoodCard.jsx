@@ -16,9 +16,7 @@ const FoodCard = ({ image, name, description, price, cartId }) => {
                     `${import.meta.env.VITE_SAVORY_SERVER}/api/cart`,
                     {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             menuId: cartId,
                             name,

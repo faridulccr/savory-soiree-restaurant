@@ -10,54 +10,65 @@ const SocialMediaSignIn = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const signinWithFacebook = async () => {
-        try {
-            await facebookSignIn();
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Log in Successful!",
-                showConfirmButton: false,
-                timer: 3000,
-            });
-            navigate(location.state?.from || "/");
-        } catch (error) {
-            Swal.fire(error.message);
-            console.log(error);
-        }
+    // create user in database
+    const createUser = async (name = "", email = "") => {
+        await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/users`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name,
+                email,
+                role: "user",
+            }),
+        });
     };
 
-    const signinWithGoogle = async () => {
-        try {
-            await googleSignIn();
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Log in Successful!",
-                showConfirmButton: false,
-                timer: 3000,
-            });
-            navigate(location.state?.from || "/");
-        } catch (error) {
-            Swal.fire(error.message);
-            console.log(error);
-        }
+    // show pop up
+    const showPopUp = () => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Log in Successful!",
+            showConfirmButton: false,
+            timer: 3000,
+        });
+        navigate(location.state?.from || "/");
     };
-    const signinWithGithub = async () => {
-        try {
-            await githubSignIn();
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Log in Successful!",
-                showConfirmButton: false,
-                timer: 3000,
+
+    const signinWithFacebook = async () => {
+        facebookSignIn()
+            .then(({ user }) => {
+                createUser(user.displayName, user.email);
+                showPopUp();
+            })
+            .catch((error) => {
+                Swal.fire(error.message);
+                console.log(error);
             });
-            navigate(location.state?.from || "/");
-        } catch (error) {
-            Swal.fire(error.message);
-            console.log(error);
-        }
+    };
+
+    const signinWithGoogle = () => {
+        googleSignIn()
+            .then(({ user }) => {
+                createUser(user.displayName, user.email);
+                showPopUp();
+            })
+            .catch((error) => {
+                Swal.fire(error.message);
+                console.log(error);
+            });
+    };
+
+    const signinWithGithub = () => {
+        githubSignIn()
+            .then(({ user }) => {
+                createUser(user.displayName, user.email);
+                showPopUp();
+            })
+            .catch((error) => {
+                Swal.fire(error.message);
+                console.log(error);
+            });
     };
 
     return (

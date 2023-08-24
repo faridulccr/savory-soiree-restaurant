@@ -46,7 +46,7 @@ const Header = () => {
                     <div
                         className={`${
                             isHideMenu && "hidden"
-                        } md:block bg-[rgba(21,21,21,0.9)] md:bg-[rgba(21,21,21,0)] px-8 md:px-0 py-4 md:py-0 w-44 md:w-auto absolute md:static -right-7 top-[105%] rounded-md`}
+                        } md:block bg-[rgba(21,21,21,0.9)] md:bg-[rgba(21,21,21,0)] px-2 md:px-0 py-4 md:py-0 w-44 md:w-auto absolute md:static -right-7 top-[105%] rounded-md`}
                         id="navbar-default"
                     >
                         <ul className="font-['Inter'] text-sm flex flex-col items-center md:flex-row gap-3 md:gap-6">
