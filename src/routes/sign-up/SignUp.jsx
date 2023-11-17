@@ -42,7 +42,7 @@ const SignUp = () => {
         try {
             setLoading(true);
             await signUp(email, password, userName, photoURL);
-            await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/users`, {
+            await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/user`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

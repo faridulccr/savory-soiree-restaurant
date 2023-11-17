@@ -12,7 +12,7 @@ const SocialMediaSignIn = () => {
 
     // create user in database
     const createUser = async (name = "", email = "") => {
-        await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/users`, {
+        await fetch(`${import.meta.env.VITE_SAVORY_SERVER}/api/user`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

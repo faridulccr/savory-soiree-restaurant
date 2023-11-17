@@ -8,6 +8,7 @@ import "./index.css";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import AllUsers from "./components/all-users/AllUsers.jsx";
 import MyCart from "./components/my-cart/MyCart";
 import AuthProvider from "./providers/AuthProvider";
 import Contact from "./routes/Contact/Contact";
@@ -32,27 +33,27 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/login",
+                path: "login",
                 element: <Login />,
             },
             {
-                path: "/sign-up",
+                path: "sign-up",
                 element: <SignUp />,
             },
             {
-                path: "/contact",
+                path: "contact",
                 element: <Contact />,
             },
             {
-                path: "/our-menu",
+                path: "our-menu",
                 element: <OurMenu />,
             },
             {
-                path: "/order",
+                path: "order",
                 element: <OrderFood />,
             },
             {
-                path: "/order/:category",
+                path: "order/:category",
                 element: <OrderFood />,
             },
         ],
@@ -67,8 +68,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/dashboard/my-cart",
+                path: "my-cart",
                 element: <MyCart />,
+            },
+            {
+                path: "all-users",
+                element: <AllUsers />,
             },
         ],
     },

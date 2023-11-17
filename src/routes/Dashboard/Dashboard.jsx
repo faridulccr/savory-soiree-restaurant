@@ -1,20 +1,27 @@
 import { AiOutlineMail } from "react-icons/ai";
 import {
+    FaBook,
     FaBookmark,
     FaCalendarAlt,
     FaHome,
     FaList,
     FaLock,
     FaShoppingCart,
+    FaUsers,
     FaWallet,
 } from "react-icons/fa";
+import { ImSpoonKnife } from "react-icons/im";
+import { TfiMenuAlt } from "react-icons/tfi";
 import { VscPreview } from "react-icons/vsc";
 import { NavLink, Outlet } from "react-router-dom";
+import useSingleUser from "../../hooks/useSingleUser";
 import useTitle from "../../hooks/useTitle";
 import "./Dashboard.style.css";
 
 const Dashboard = () => {
     useTitle("Dashboard");
+    const [isLoading, user] = useSingleUser();
+
     return (
         <div id="dashboard">
             <div className="drawer lg:drawer-open">
@@ -50,37 +57,72 @@ const Dashboard = () => {
                             </span>
                         </a>
                         {/* without slash means start from current path (dashboard) */}
-                        <li>
-                            <NavLink to="user-home">
-                                <FaHome /> User Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="reservation">
-                                <FaCalendarAlt /> Reservation
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="payment-history">
-                                <FaWallet /> payment history
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="my-cart">
-                                <FaShoppingCart /> my cart
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="add-review">
-                                <VscPreview />
-                                add review
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="my-booking">
-                                <FaBookmark /> my booking
-                            </NavLink>
-                        </li>
+                        {!isLoading &&
+                            (user?.role === "admin" ? (
+                                <>
+                                    <li>
+                                        <NavLink to="admin-home">
+                                            <FaHome /> Admin Home
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="add-items">
+                                            <ImSpoonKnife /> Add Items
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="manage-items">
+                                            <TfiMenuAlt /> Manage Items
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="manage-bookings">
+                                            <FaBook /> Manage Bookings
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="all-users">
+                                            <FaUsers />
+                                            All users
+                                        </NavLink>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li>
+                                        <NavLink to="user-home">
+                                            <FaHome /> User Home
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="reservation">
+                                            <FaCalendarAlt /> Reservation
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="payment-history">
+                                            <FaWallet /> payment history
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="my-cart">
+                                            <FaShoppingCart /> my cart
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="add-review">
+                                            <VscPreview />
+                                            add review
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="my-booking">
+                                            <FaBookmark /> my booking
+                                        </NavLink>
+                                    </li>
+                                </>
+                            ))}
+
                         <hr className="mt-2 mb-8 w-full" />
                         {/* with slash means start from home path (/) */}
                         <li>
